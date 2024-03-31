@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Add a New Song</h1>
+
+<!-- Form for adding a new song -->
+<form method="POST" action="{{ url_for('add_song') }}">
+    <!-- Include this line for security (CSRF protection) -->
+    {{ form.hidden_tag() }}
+
+    <!-- Field for song title -->
+    <div>
+        {{ form.title.label }}
+        {{ form.title(size=32) }}
+        {% if form.title.errors %}
+            <ul class="errors">
+                {% for error in form.title.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Field for artist -->
+    <div>
+        {{ form.artist.label }}
+        {{ form.artist(size=32) }}
+        {% if form.artist.errors %}
+            <ul class="errors">
+                {% for error in form.artist.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Submit button -->
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
+{% endblock %}

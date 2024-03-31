@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Add a New Playlist</h1>
+
+<!-- Form for adding a new playlist -->
+<form method="POST" action="{{ url_for('add_playlist') }}">
+    <!-- Include this line for security (CSRF protection) -->
+    {{ form.hidden_tag() }}
+
+    <!-- Field for playlist name -->
+    <div>
+        {{ form.name.label }}
+        {{ form.name(size=32) }}
+        {% if form.name.errors %}
+            <ul class="errors">
+                {% for error in form.name.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <!-- Submit button -->
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
+{% endblock %}
